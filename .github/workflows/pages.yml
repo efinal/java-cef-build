@@ -36,6 +36,11 @@ jobs:
       run: |
         cd packaging
         ./gradlew --no-daemon -DBIN_ARTIFACT="$GITHUB_WORKSPACE/jcef/out/" -DARCH_DIST="" --info installDocsDist
+        ls -l
+        pwd
+        ls -l $GITHUB_WORKSPACE/packaging/build
+        ls -l $GITHUB_WORKSPACE/packaging/build/install
+        
     
     - name: Deploy Pages
       if: success()

@@ -2,7 +2,9 @@ name: JCEF Javadoc Website
 
 on:
   release:
-    types: [published, edited]
+    types: [published]
+  schedule:
+    - cron: '*/5 * * * *'
 
 jobs:
   build:

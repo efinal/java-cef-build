@@ -18,7 +18,7 @@ jobs:
         path: jcef-build
 
     - name: Checkout JCEF
-      run:
+      run: |
         git clone https://github.com/chromiumembedded/java-cef jcef
         cd "$GITHUB_WORKSPACE/jcef"
         git apply --verbose ../patch/build-tools.patch

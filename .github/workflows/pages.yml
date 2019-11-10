@@ -36,17 +36,12 @@ jobs:
       run: |
         cd packaging
         ./gradlew --no-daemon -DBIN_ARTIFACT="$GITHUB_WORKSPACE/jcef/out/" -DARCH_DIST="" --info installDocsDist
-        ls -l
-        pwd
-        ls -l $GITHUB_WORKSPACE/packaging/build
-        ls -l $GITHUB_WORKSPACE/packaging/build/install
-        
-    
+
     - name: Deploy Pages
       if: success()
       uses: crazy-max/ghaction-github-pages@v1.0.1
       with:
         target_branch: gh-pages
-        build_dir: "$GITHUB_WORKSPACE/packaging/build/install/java-cef-build-docs"
+        build_dir: "${{ env.GITHUB_WORKSPACE }}/packaging/build/install/java-cef-build-docs"
       env:
-        GITHUB_PAT: ${{ secrets.TR_GITHUB_TOKEN }}
+        GITHUB_PAT: ${{ secrets.TR_GITHUB_TOKEN }}  

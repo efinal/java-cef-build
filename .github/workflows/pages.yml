@@ -42,6 +42,6 @@ jobs:
       uses: crazy-max/ghaction-github-pages@v1.0.1
       with:
         target_branch: gh-pages
-        build_dir: "${{ GITHUB_WORKSPACE }}/packaging/build/install/java-cef-build-docs"
+        build_dir: "{{ GITHUB_WORKSPACE }}/packaging/build/install/java-cef-build-docs"
       env:
         GITHUB_PAT: ${{ secrets.TR_GITHUB_TOKEN }}  

@@ -1,30 +1,16 @@
 #!/bin/bash
 
-# $1 is the directory for jcef sources
-pushd $1 2>&1 > /dev/null
-git stash 2>&1 > /dev/null
-git pull
-popd 2>&1 > /dev/null
-export CEF_VERSION=$(perl -n -e  '/set\s*\(CEF_VERSION\s+"(.+)"\s*\)/i && print "$1"' "$1/CMakeLists.txt")
-pushd $1 2>&1 > /dev/null
-git stash pop 2>&1 > /dev/null
-popd 2>&1 > /dev/null
+{
+	# Pattern taken from https://bitbucket.org/chromiumembedded/cef/issues/2596/improve-cef-version-number-format#comment-50679036
+	export CEF_VERSION=$(perl -n -e  '/^\s*set\s*\(CEF_VERSION\s+"((?:\d+\.?){3}\+g\w+\+chromium-(?:\d+\.?){4})"\s*\)/i && print "$1"' "$1/CMakeLists.txt")
+	echo -e '\n\nChanges'
 
-if [ -z $CEF_VERSION ]; then
-  echo "Failed to retrieve cef version"
-  exit 1
-fi
+	echo "git log --pretty=format:'%h - %s <%aN>' <after_commit>...<latest_commit>"
 
-echo "CEF_VERSION=$CEF_VERSION"
+	if [ -z $CEF_VERSION ]; then
+	  echo "Failed to retrieve cef version"
+	  exit 1
+	fi
+} > /dev/null
 
-# git tag --annotate "$CEF_VERSION" --file <(cat << 'EOF'
-#
-# - Builds for linux and mac are working
-# - Deploy for linux working as well
-# EOF
-# )
-
-# git tag --delete "$CEF_VERSION"
-# git push origin --delete "$CEF_VERSION"
-
-# git push origin "$CEF_VERSION"
+echo "$CEF_VERSION"

@@ -27,22 +27,22 @@ matrix:
             - build-essential
             - libgtk2.0-dev
 
-    - os: osx
-      osx_image: xcode11
-      compiler: clang
-      env: ARCH_DIST=macosx64
-      addons:
-        homebrew:
-          update: true
-          packages:
-            - ninja
-            - ant
-            - lbzip2
-            - gnu-tar
-            - pyenv
-            - cmake
-          taps: AdoptOpenJDK/openjdk
-          casks: adoptopenjdk8-openj9
+    # - os: osx
+    #   osx_image: xcode11
+    #   compiler: clang
+    #   env: ARCH_DIST=macosx64
+    #   addons:
+    #     homebrew:
+    #       update: true
+    #       packages:
+    #         - ninja
+    #         - ant
+    #         - lbzip2
+    #         - gnu-tar
+    #         - pyenv
+    #         - cmake
+    #       taps: AdoptOpenJDK/openjdk
+    #       casks: adoptopenjdk8-openj9
 
     - os: linux
       services: docker
